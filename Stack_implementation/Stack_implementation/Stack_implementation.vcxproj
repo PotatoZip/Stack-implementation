@@ -143,11 +143,13 @@
     <ClCompile Include="Messages.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Stack_implementation.cpp" />
+    <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Messages.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

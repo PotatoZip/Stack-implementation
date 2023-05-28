@@ -1,22 +1,17 @@
 #pragma once
 
-enum FIELD_OF_STUDY {
-	computer_science,
-	mathematics,
-	biology,
-	history
+struct Stack {
+	void* pData;
+	struct Stack* next;
 };
 
-struct Student {
-	char *name;
-	int year;
-	FIELD_OF_STUDY course;
-};
-
-void* StackInit(char* name, size_t year, FIELD_OF_STUDY course);
-void StackFree(void* p);
-void StackAdd();
-void StackFind();
-void StackSave();
-void StackLoad();
-
+typedef void(*freeData)(void* ptr);
+typedef int (compData)(void* ptr, void* search);
+void StackInit(freeData ptrFree);
+void StackFree();
+Stack* StackPush(void* ptr);
+void *StackPop();
+Stack* StackTop();
+void* StackFind(void* search, compData pComp, int first);
+void StackSave(const char* filename);
+void StackLoad(const char* filename);
