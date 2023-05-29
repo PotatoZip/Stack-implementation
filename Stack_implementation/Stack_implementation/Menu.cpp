@@ -23,6 +23,9 @@ void Menu() {
 			case 2:
 				ClearTerminal();
 				Pop();
+				printf("Press any key to continue...\n");
+				tmp = getch();
+				ClearTerminal();
 				break;
 			case 3:
 				ClearTerminal();
@@ -119,8 +122,8 @@ void Pop() {
 
 	void *tmp = StackPop();
 	if (tmp != NULL) {
+		printf("Data deleted:\n\n");
 		StructPrint(tmp);
-		printf("\n\n");
 	}
 	StructFree(tmp);
 }

@@ -58,6 +58,7 @@ void StructPrint(void* ptr) {
 			printf("Field of study: N/A\n");
 			break;
 		}
+		printf("\n");
 	}
 }
 
@@ -72,14 +73,14 @@ int StructFind(void* curr, void* search) {
 
 void StructSave(const char* filename, void* ptr) {
 	Student* pStudent = (Student*)ptr;
-	if (pStudent == NULL) {
-		RiseErr(FILE_SAVE_FAIL);
+	if (!pStudent) {
+		RiseErr(ALLOC_ERR);
 		return;
 	}
 
 	FILE* file = fopen(filename, "wb");
-	if (file == NULL) {
-		RiseErr(ALLOC_ERR);
+	if (file != 0) {
+		RiseErr(FILE_SAVE_FAIL);
 		return;
 	}
 
@@ -94,13 +95,13 @@ void StructSave(const char* filename, void* ptr) {
 
 void* StructLoad(const char* filename) {
 	FILE* file = fopen(filename, "rb");
-	if (file == NULL) {
+	if (file != 0) {
 		RiseErr(FILE_LOAD_FAIL);
 		return NULL;
 	}
 
 	Student* pStudent = (Student*)malloc(sizeof(Student));
-	if (pStudent == NULL) {
+	if (!pStudent) {
 		RiseErr(ALLOC_ERR);
 		fclose(file);
 		return NULL;
@@ -121,6 +122,7 @@ void* StructLoad(const char* filename) {
 	fread(&(pStudent->course), sizeof(FIELD_OF_STUDY), 1, file);
 	fread(&(pStudent->len), sizeof(size_t), 1, file);
 	fclose(file);
+
 	return pStudent;
 
 }

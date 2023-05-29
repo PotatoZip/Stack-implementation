@@ -13,18 +13,6 @@ void StackInit(freeData ptrFree) {
 	pFree = ptrFree;
 }
 
-void StackFree() {
-	Stack* curr = top;
-	Stack* next = NULL;
-	while (curr) {
-		(*pFree)(curr->pData);
-		next = curr;
-		curr = curr->next;
-		free(next);
-	}
-	top = NULL;
-}
-
 Stack* StackPush(void* ptr) {
 	Stack* curr = (Stack*)malloc(sizeof(Stack));
 	if (!curr) {
@@ -35,6 +23,18 @@ Stack* StackPush(void* ptr) {
 	curr->next = top;
 	top = curr;
 	return curr;
+}
+
+void StackFree() {
+	Stack* curr = top;
+	Stack* next = NULL;
+	while (curr) {
+		(*pFree)(curr->pData);
+		next = curr;
+		curr = curr->next;
+		free(next);
+	}
+	top = NULL;
 }
 
 void *StackPop() {
